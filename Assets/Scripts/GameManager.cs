@@ -12,14 +12,14 @@ public class GameManager : MonoBehaviour
     // kills to spawn boss
     private float[] waveKillsData = { 15, 20, 25, 30 };
 
-    // pasta min spawn time, max spawn time
+    // pasta min spawn time, max spawn time, pasta on screen
     private float[][] wavePastaData =
     {
-        new float[2] { 1.2f, 2.2f },
-        new float[2] { 0.8f, 1.8f },
-        new float[2] { 0.5f, 1.5f },
-        new float[2] { 0.4f, 1.4f },
-        new float[2] { 0.33f, 1.33f }
+        new float[3] { 1.2f, 2.2f, 8 },
+        new float[3] { 0.8f, 1.8f, 7 },
+        new float[3] { 0.5f, 1.5f, 6 },
+        new float[3] { 0.4f, 1.4f, 6 },
+        new float[3] { 0.33f, 1.33f, 5 }
 
     };
     // shield min spawn time, max spawn time, active time

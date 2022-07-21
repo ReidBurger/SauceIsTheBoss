@@ -11,10 +11,18 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject bullet;
     private GameObject player;
+    [SerializeField]
+    private AudioClip shoot_sfx;
+    [SerializeField]
+    private AudioClip death_sfx;
+    private AudioSource source;
+    [SerializeField]
+    private GameObject gun;
 
     // Start is called before the first frame update
     void Start()
     {
+        source = transform.GetComponent<AudioSource>();
         player = GameObject.FindWithTag("Player");
         StartCoroutine(shootRoutine());
     }
@@ -43,7 +51,12 @@ public class Enemy : MonoBehaviour
 
     private void enemyDie()
     {
-        Destroy(gameObject);
+        StopAllCoroutines();
+        source.PlayOneShot(death_sfx, 1);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        gun.SetActive(false);
+        Destroy(gameObject, 0.5f);
     }
 
     private IEnumerator shootRoutine()
@@ -60,7 +73,8 @@ public class Enemy : MonoBehaviour
             transform.up = player.transform.position - transform.position;
             transform.Rotate(new Vector3(0, 0, angleOffset));
 
-            Instantiate(bullet, transform.position, transform.rotation);
+            source.PlayOneShot(shoot_sfx, 1);
+            GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
 
             StartCoroutine(shootRoutine());
         }

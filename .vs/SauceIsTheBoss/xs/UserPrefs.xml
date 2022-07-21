@@ -1,23 +1,23 @@
 ﻿<Properties StartupConfiguration="{5724F05E-A54B-BCA0-0347-A439C9E2495B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Spawner.cs">
     <Files>
-      <File FileName="Assets/Scripts/Enemy.cs" Line="37" Column="66" IsPinned="True" />
-      <File FileName="Assets/Scripts/Player.cs" />
-      <File FileName="Assets/Scripts/Pasta.cs" />
+      <File FileName="Assets/Scripts/Enemy.cs" Line="77" Column="96" IsPinned="True" />
+      <File FileName="Assets/Scripts/EnemySpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/EnemyPathfinding.cs" Line="38" Column="4" />
+      <File FileName="Assets/Scripts/Player.cs" Line="88" Column="76" />
+      <File FileName="Assets/Scripts/Pasta.cs" Line="8" Column="38" />
       <File FileName="Assets/Scripts/Projectile.cs" />
       <File FileName="Assets/Scripts/Bullet.cs" />
       <File FileName="Assets/Scripts/Pickup.cs" />
-      <File FileName="Assets/Scripts/Spawner.cs" />
-      <File FileName="Assets/Scripts/EnemyPathfinding.cs" />
-      <File FileName="Assets/Scripts/EnemySpawner.cs" />
+      <File FileName="Assets/Scripts/Spawner.cs" Line="15" Column="1" />
       <File FileName="Assets/Scripts/UIManager.cs" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="45" Column="40" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="19" Column="40" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SauceIsTheBoss" expanded="True">
-            <Node name="Assets" expanded="True" selected="True">
+            <Node name="Assets" expanded="True">
               <Node name="AstarPathfindingProject" expanded="True">
                 <Node name="Behaviors" expanded="True" />
                 <Node name="Core" expanded="True" />
@@ -26,7 +26,9 @@
                   <Node name="Editor" expanded="True" />
                 </Node>
               </Node>
-              <Node name="Scripts" expanded="True" />
+              <Node name="Scripts" expanded="True">
+                <Node name="Spawner.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -35,7 +37,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f0e929ec-1a22-4ab2-8c8f-e584a17459cf" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9728d443-d1bc-47b9-bca7-f99ab51c2895" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

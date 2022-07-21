@@ -24,6 +24,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
+        //gameManager.
         if (Random.Range(0.0f, 1.0f) < startSpawnChance)
         {
             GameObject newSpawn = Instantiate(spawnable, transform.position, Quaternion.identity);

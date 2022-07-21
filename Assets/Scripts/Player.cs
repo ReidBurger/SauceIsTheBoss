@@ -25,13 +25,29 @@ public class Player : MonoBehaviour
     private bool isInKitchen = false;
     [SerializeField]
     private GameObject UI_Manager;
-    private UIManager UIManager; 
+    private UIManager UIManager;
+    [SerializeField]
+    private AudioClip throw_sfx;
+    [SerializeField]
+    private AudioClip shield_sfx;
+    [SerializeField]
+    private AudioClip shield_powerdown_sfx;
+    [SerializeField]
+    private AudioClip pickup_sfx;
+    [SerializeField]
+    private AudioClip fail_sfx;
+    [SerializeField]
+    private AudioClip kitchen_ready_sfx;
+    private AudioSource source;
+    private bool playingFailSFX = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = startingPosition;
         UIManager = UI_Manager.GetComponent<UIManager>();
+        source = transform.GetComponent<AudioSource>();
         UIManager.updateAmmo(ammo);
     }
 
@@ -56,8 +72,13 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && ammo > 0)
         {
             ammo--;
+            source.PlayOneShot(throw_sfx, 1);
             UIManager.updateAmmo(ammo);
             Instantiate(pasta, transform.position, transform.rotation);
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            source.PlayOneShot(fail_sfx, 1);
         }
     }
 
@@ -66,9 +87,15 @@ public class Player : MonoBehaviour
         // if the item is pasta, increase ammo by 1
         if (item.transform.name == "Pasta_Pickup(Clone)" && ammo < maxAmmo)
         {
+            source.PlayOneShot(pickup_sfx, 1);
             ammo++;
             UIManager.updateAmmo(ammo);
             Destroy(item);
+        }
+        else if (item.transform.name == "Pasta_Pickup(Clone)" && playingFailSFX != true)
+        {
+            playingFailSFX = true;
+            source.PlayOneShot(fail_sfx, 1);
         }
         else if (item.transform.name == "Force_Field_Pickup(Clone)")
         {
@@ -121,6 +148,7 @@ public class Player : MonoBehaviour
     private IEnumerator kitchenReload()
     {
         yield return new WaitForSeconds(kitchenReloadTime);
+        source.PlayOneShot(kitchen_ready_sfx, 1);
         Debug.Log("Kitchen Ready!");
         kitchenReady = true;
     }
@@ -198,6 +226,7 @@ public class Player : MonoBehaviour
     {
         if (forcefieldActive == false)
         {
+            source.PlayOneShot(shield_sfx, 0.6f);
             forcefieldActive = true;
             forcefield.SetActive(true);
             forcefieldTimeRemaining = forcefieldTime;
@@ -214,6 +243,8 @@ public class Player : MonoBehaviour
 
     private void deactivateForceField()
     {
+        source.Stop();
+        source.PlayOneShot(shield_powerdown_sfx, 1);
         forcefieldActive = false;
         forcefield.SetActive(false);
         UIManager.updateShield(0);
@@ -235,5 +266,7 @@ public class Player : MonoBehaviour
     {
         shootPasta();
         checkKitchen();
+
+        if (Input.GetKeyUp(KeyCode.Space)) playingFailSFX = false;
     }
 }
