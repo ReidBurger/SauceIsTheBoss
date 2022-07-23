@@ -14,5 +14,7 @@ public class CursorObj : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         transform.position = ray.origin;
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 }

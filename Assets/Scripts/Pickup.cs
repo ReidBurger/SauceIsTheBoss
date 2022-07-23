@@ -5,13 +5,23 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     [SerializeField]
-    private GameObject highlight;
+    private Sprite normal;
+    [SerializeField]
+    private Sprite shadow;
+    private SpriteRenderer image;
+
+    private void Start()
+    {
+        image = GetComponent<SpriteRenderer>();
+
+        image.sprite = normal;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            highlight.SetActive(true);
+            image.sprite = shadow;
         }
     }
 
@@ -19,7 +29,7 @@ public class Pickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            highlight.SetActive(false);
+            image.sprite = normal;
         }
     }
 }

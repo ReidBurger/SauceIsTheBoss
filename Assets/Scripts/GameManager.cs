@@ -15,11 +15,11 @@ public class GameManager : MonoBehaviour
     // pasta min spawn time, max spawn time, pasta on screen
     private float[][] wavePastaData =
     {
-        new float[3] { 1.2f, 2.2f, 8 },
-        new float[3] { 0.8f, 1.8f, 7 },
-        new float[3] { 0.5f, 1.5f, 6 },
-        new float[3] { 0.4f, 1.4f, 6 },
-        new float[3] { 0.33f, 1.33f, 5 }
+        new float[3] { 1.2f, 3.2f, 8 },
+        new float[3] { 1.5f, 3.5f, 7 },
+        new float[3] { 1.8f, 3.8f, 6 },
+        new float[3] { 2.1f, 4.1f, 6 },
+        new float[3] { 2.3f, 4.3f, 5 }
 
     };
     // shield min spawn time, max spawn time, active time
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         Player playerScript = player.GetComponent<Player>();
         playerScript.updateKitchen(waveKitchenData[findIndex(currentWave, waveKitchenData.Length)]);
 
-        Debug.Log("New Wave: " + (currentWave + 1));
+        uiManager.roundDisplay(currentWave + 1);
 
         currentWave++;
         kills = 0;

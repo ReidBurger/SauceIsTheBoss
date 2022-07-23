@@ -5,10 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed = 10f;
-    private float upBound = 10;
-    private float downBound = -10;
-    private float rightBound = 10;
-    private float leftBound = -10;
+    private float upBound = 6;
+    private float downBound = -6;
+    private float rightBound = 11;
+    private float leftBound = -11;
 
     void Update()
     {

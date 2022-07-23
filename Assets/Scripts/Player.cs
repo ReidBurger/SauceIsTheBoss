@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private Vector2 startingPosition = new Vector2(0, 0);
+    private Vector2 startingPosition = new Vector2(3.5f, -4f);
     [SerializeField]
     private float speed = 5.0f;
     private int ammo = 0;
@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     private AudioClip kitchen_ready_sfx;
     private AudioSource source;
     private bool playingFailSFX = false;
+    [SerializeField]
+    private bool isInvincible = false;
 
 
     // Start is called before the first frame update
@@ -79,6 +81,7 @@ public class Player : MonoBehaviour
         else if (Input.GetMouseButtonDown(0))
         {
             source.PlayOneShot(fail_sfx, 1);
+            UIManager.emptyWarning();
         }
     }
 
@@ -95,6 +98,7 @@ public class Player : MonoBehaviour
         else if (item.transform.name == "Pasta_Pickup(Clone)" && playingFailSFX != true)
         {
             playingFailSFX = true;
+            UIManager.fullWarning();
             source.PlayOneShot(fail_sfx, 1);
         }
         else if (item.transform.name == "Force_Field_Pickup(Clone)")
@@ -166,7 +170,7 @@ public class Player : MonoBehaviour
             {
                 deactivateForceField();
             }
-            else
+            else if (isInvincible != true)
             {
                 // You died
                 Destroy(collision.gameObject);
@@ -226,7 +230,7 @@ public class Player : MonoBehaviour
     {
         if (forcefieldActive == false)
         {
-            source.PlayOneShot(shield_sfx, 0.6f);
+            source.PlayOneShot(shield_sfx, 0.4f);
             forcefieldActive = true;
             forcefield.SetActive(true);
             forcefieldTimeRemaining = forcefieldTime;
@@ -244,7 +248,7 @@ public class Player : MonoBehaviour
     private void deactivateForceField()
     {
         source.Stop();
-        source.PlayOneShot(shield_powerdown_sfx, 1);
+        source.PlayOneShot(shield_powerdown_sfx, 0.8f);
         forcefieldActive = false;
         forcefield.SetActive(false);
         UIManager.updateShield(0);

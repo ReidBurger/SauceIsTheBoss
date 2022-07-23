@@ -86,6 +86,17 @@ public class Enemy : MonoBehaviour
 
         transform.LookAt(newPos, Vector3.forward);
         transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z * -1);
+
+        if (transform.eulerAngles.z > 180)
+        {
+            // facing right
+            gun.transform.localScale = new Vector2(8, 8);
+        }
+        else
+        {
+            // facing left
+            gun.transform.localScale = new Vector2(8, -8);
+        }
     }
 
     // Update is called once per frame

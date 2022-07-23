@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pasta : MonoBehaviour
 {
     [SerializeField]
-    private float initialSpeed = 12f;
+    private float initialSpeed = 14f;
 
     private float speed;
     [SerializeField]
@@ -23,7 +23,7 @@ public class Pasta : MonoBehaviour
     private IEnumerator pastaShoot()
     {
         transform.Translate(transform.up * speed * Time.deltaTime, Space.World);
-        speed -= 0.18f;
+        speed -= 0.16f;
         if (speed <= 0 && hasSplat == false)
         {
             hasSplat = true;

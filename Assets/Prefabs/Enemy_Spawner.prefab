@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2819991719795276341}
   - component: {fileID: 2819991719795276298}
-  - component: {fileID: 2819991719795276299}
   m_Layer: 0
   m_Name: Enemy_Spawner
   m_TagString: Untagged
@@ -49,58 +48,3 @@ MonoBehaviour:
   minSpawnTime: 2
   maxSpawnTime: 3.5
   maxEnemiesOnScreen: 3
---- !u!114 &2819991719795276299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2819991719795276340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  data:
-    dataString: UEsDBBQAAAgIAACYn+sLF4ahXAIAABMFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VEtzmzAQ/isenZsOeFITemuJ4/TgxBM3kwsXGS1GYyExesSv8X/vSoCh7vSE+Pbb3W8f0plwaRoorNILzdlSMSDfJ8SfyZfJYHyGA90queYn6DkfnNnKk2jgvFHLFeKxdzOqBqt58UNuhSdHCDrJS6XrOdtCpow1CJdUGECTVtZ7S4TOE3LAz13qXY54mib+dMJTGk0ueCxAWtADtSf2tJblZCFo3QDzkgdy/NCx45YmsZiOEX2d+uhKCG46LcQem1BrRhvjsBIkME6xtiBghr8V8G1lvc6x82tZGrCdKE2Pj1xji9qo5Kdq+1ZTs2uVfVLhfJ7ZfRDVxlz+Y76Lg7nUqn7u08aRT2ErXuze6LGgxo76OoYfB91x6M+eih3dCPioQL6ohVZOMjRa7byrMzB9HH6vlWUVFLsBb6XegK75/3R8DZdQ/CETvN6Ext+3wFqo0O4we9A4ml8oOGyG6UIg6lW8G/hNt+MV6gxPXBuLpq5K6eVtlNOeSuahZ74aZzOlJQS4E92ApMIeVxjG3k7wxjZKe2N5ov6ydMk7W38HblwCPPCj6Ma0UvvrsEyl9ksw1auzgksYRHvDC/YpU1K2CzbuSe+2drqkxcht6zj7e7XINIlpMk0gTaY0jTabO5pEybcoSh9YlLJ0lpKwe1xinVSsWqFde3Bqcggucc/6N2Sy0LQJy8403S/4qVajlnNZqnWhAeRrG+EqHDQmwWvJ5oxjg9ZgLZdh3uScE6GKHbD8GigPlc4PVtN8iJKThn8q65GcZOHRyImHr7u80vDJYe+T98Eu5PIHUEsDBBQAAAgIAACYn+vsYdF+bQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSkblhormReaqluVGipUFSkm6iuYG5qYGBpUWKgWWKpZmlUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACYn+sLF4ahXAIAABMFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACYn+vsYdF+bQAAAHgAAAAJACQAAAAAAAAAAAAAAKkCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAYQMAAAAA
-    upgradeData: 
-    file_cachedStartup: {fileID: 0}
-    data_cachedStartup: 
-    cacheStartup: 0
-  showNavGraphs: 1
-  showUnwalkableNodes: 1
-  debugMode: 0
-  debugFloor: 0
-  debugRoof: 1
-  manualDebugFloorRoof: 0
-  showSearchTree: 0
-  unwalkableNodeDebugSize: 0.3
-  logPathResults: 0
-  maxNearestNodeDistance: 100
-  scanOnStartup: 1
-  fullGetNearestSearch: 0
-  prioritizeGraphs: 0
-  prioritizeGraphsLimit: 1
-  colorSettings:
-    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
-    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
-    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
-    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
-    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
-    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
-    _AreaColors:
-    - {r: 0, g: 0, b: 0, a: 0}
-  tagNames: []
-  heuristic: 2
-  heuristicScale: 1
-  threadCount: 1
-  maxFrameTime: 10
-  batchGraphUpdates: 0
-  graphUpdateBatchingInterval: 0.2
-  euclideanEmbedding:
-    mode: 0
-    seed: 0
-    pivotPointRoot: {fileID: 0}
-    spreadOutCount: 1
-  showGraphs: 1
