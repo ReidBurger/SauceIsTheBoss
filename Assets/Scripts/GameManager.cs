@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     // array index corresponds to wave number for the following
 
     // kills to spawn boss
-    private float[] waveKillsData = { 15, 20, 25, 30 };
+    private float[] waveKillsData = { 10, 15, 19, 24 };
 
     // pasta min spawn time, max spawn time, pasta on screen
     private float[][] wavePastaData =
@@ -37,8 +37,8 @@ public class GameManager : MonoBehaviour
     {
         new float[7] { 3, 5, 0.8f, 0.8f, 2.8f, 3.8f, 1 },
         new float[7] { 2, 4, 0.94f, 0.8f, 2.2f, 3.2f, 1 },
-        new float[7] { 1.7f, 3.7f, 1.08f, 0.8f, 2.2f, 3.2f, 2 },
-        new float[7] { 1.3f, 3.3f, 1.22f, 0.8f, 2, 3, 2 },
+        new float[7] { 2.2f, 4.2f, 1.08f, 0.8f, 2.2f, 3.2f, 2 },
+        new float[7] { 1.9f, 3.5f, 1.22f, 0.8f, 2, 3, 2 },
         new float[7] { 1, 3, 1.36f, 0.8f, 2, 3, 2 }
     };
     // kitchen wait time, pickup time

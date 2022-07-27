@@ -78,8 +78,8 @@ public class UIManager : MonoBehaviour
         Image img = round_num_txt.GetComponent<Image>();
         img.sprite = round_num_sprites[roundNum];
 
-        StartCoroutine(Fade(round_num_txt, 1.5f));
-        StartCoroutine(Fade(round_txt, 1.5f));
+        StartCoroutine(Fade(round_num_txt, 2));
+        StartCoroutine(Fade(round_txt, 2));
     }
 
     public void updateShield(int time)

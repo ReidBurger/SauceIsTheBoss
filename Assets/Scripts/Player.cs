@@ -42,6 +42,10 @@ public class Player : MonoBehaviour
     private bool playingFailSFX = false;
     [SerializeField]
     private bool isInvincible = false;
+    [SerializeField]
+    private bool instantAcceleration = false;
+    private float oldHorizontalAcceleration = 0;
+    private float oldVerticalAcceleration = 0;
 
 
     // Start is called before the first frame update
@@ -58,6 +62,34 @@ public class Player : MonoBehaviour
         // Player movement
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+
+        if (instantAcceleration)
+        {
+            if (horizontalInput > oldHorizontalAcceleration)
+            {
+                if (horizontalInput > 0) horizontalInput = 0.99f;
+                if (horizontalInput < 0) horizontalInput = 0;
+            }
+            else if (horizontalInput < oldHorizontalAcceleration)
+            {
+                if (horizontalInput > 0) horizontalInput = 0;
+                if (horizontalInput < 0) horizontalInput = -0.99f;
+            }
+
+            if (verticalInput > oldVerticalAcceleration)
+            {
+                if (verticalInput > 0) verticalInput = 0.99f;
+                if (verticalInput < 0) verticalInput = 0;
+            }
+            else if (verticalInput < oldVerticalAcceleration)
+            {
+                if (verticalInput > 0) verticalInput = 0;
+                if (verticalInput < 0) verticalInput = -0.99f;
+            }
+
+            oldHorizontalAcceleration = Input.GetAxis("Horizontal");
+            oldVerticalAcceleration = Input.GetAxis("Vertical");
+        }
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
@@ -90,7 +122,7 @@ public class Player : MonoBehaviour
         // if the item is pasta, increase ammo by 1
         if (item.transform.name == "Pasta_Pickup(Clone)" && ammo < maxAmmo)
         {
-            source.PlayOneShot(pickup_sfx, 1);
+            source.PlayOneShot(pickup_sfx, 0.6f);
             ammo++;
             UIManager.updateAmmo(ammo);
             Destroy(item);
