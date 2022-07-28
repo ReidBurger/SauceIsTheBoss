@@ -24,15 +24,28 @@ public class Pasta : MonoBehaviour
     {
         transform.Translate(transform.up * speed * Time.deltaTime, Space.World);
         speed -= 0.16f;
-        if (speed <= 0 && hasSplat == false)
+        if (speed <= 0 && !hasSplat)
         {
-            hasSplat = true;
-            source.PlayOneShot(splat_sfx, 0.5f);
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(gameObject, 0.4f);
+            splat();
         }
 
         yield return new WaitForFixedUpdate();
         StartCoroutine(pastaShoot());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Wall") && !hasSplat)
+        {
+            splat();
+        }
+    }
+
+    private void splat()
+    {
+        hasSplat = true;
+        source.PlayOneShot(splat_sfx, 0.5f);
+        gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        Destroy(gameObject, 0.4f);
     }
 }

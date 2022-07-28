@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     private GameObject round_num_txt;
     [SerializeField]
     private Sprite[] round_num_sprites;
+    [SerializeField]
+    private GameObject[] kitchenMeterSprites;
 
     public void emptyWarning()
     {
@@ -42,7 +44,7 @@ public class UIManager : MonoBehaviour
         SpriteRenderer renderer = sprite.GetComponent<SpriteRenderer>();
         Image image = sprite.GetComponent<Image>();
 
-        for (float t = 0f; t < duration; t += Time.deltaTime)
+        for (float t = 0; t < duration; t += Time.deltaTime)
         {
             float normalizedTime = t / duration;
 
@@ -101,5 +103,43 @@ public class UIManager : MonoBehaviour
             bar_sprite.SetActive(false);
         }
         progressBarSprites[roundedProgress].SetActive(true);
+    }
+
+    public void startReload(int plates, float time)
+    {
+        StartCoroutine(reloadingPlatesUI(plates, time));
+    }
+
+    public IEnumerator reloadingPlatesUI(int plates, float time)
+    {
+        float spp = time / plates;
+        int platesReady = 0;
+
+        updateKitchenMeter(platesReady, true);
+
+        while (platesReady < plates)
+        {
+            yield return new WaitForSeconds(spp);
+            platesReady++;
+            updateKitchenMeter(platesReady, true);
+        }
+    }
+
+    public void updateKitchenMeter(int plates, bool filling)
+    {
+        foreach (GameObject meterSprite in kitchenMeterSprites)
+        {
+            meterSprite.SetActive(false);
+        }
+
+        if (filling)
+        {
+            kitchenMeterSprites[plates].SetActive(true);
+        }
+        else
+        {
+            if (plates == 6) plates = -6;
+            kitchenMeterSprites[plates + 6].SetActive(true);
+        }
     }
 }

@@ -24,8 +24,11 @@ public class Player : MonoBehaviour
     private bool kitchenReady = true;
     private bool isInKitchen = false;
     [SerializeField]
+    private GameObject kitchenObj;
+    private Kitchen kitchen;
+    [SerializeField]
     private GameObject UI_Manager;
-    private UIManager UIManager;
+    private UIManager uiManager;
     [SerializeField]
     private AudioClip throw_sfx;
     [SerializeField]
@@ -52,9 +55,10 @@ public class Player : MonoBehaviour
     void Start()
     {
         transform.position = startingPosition;
-        UIManager = UI_Manager.GetComponent<UIManager>();
+        uiManager = UI_Manager.GetComponent<UIManager>();
         source = transform.GetComponent<AudioSource>();
-        UIManager.updateAmmo(ammo);
+        kitchen = kitchenObj.GetComponent<Kitchen>();
+        uiManager.updateAmmo(ammo);
     }
 
     private void movePlayer()
@@ -107,13 +111,13 @@ public class Player : MonoBehaviour
         {
             ammo--;
             source.PlayOneShot(throw_sfx, 1);
-            UIManager.updateAmmo(ammo);
+            uiManager.updateAmmo(ammo);
             Instantiate(pasta, transform.position, transform.rotation);
         }
         else if (Input.GetMouseButtonDown(0))
         {
             source.PlayOneShot(fail_sfx, 1);
-            UIManager.emptyWarning();
+            uiManager.emptyWarning();
         }
     }
 
@@ -124,13 +128,13 @@ public class Player : MonoBehaviour
         {
             source.PlayOneShot(pickup_sfx, 0.6f);
             ammo++;
-            UIManager.updateAmmo(ammo);
+            uiManager.updateAmmo(ammo);
             Destroy(item);
         }
         else if (item.transform.name == "Pasta_Pickup(Clone)" && playingFailSFX != true)
         {
             playingFailSFX = true;
-            UIManager.fullWarning();
+            uiManager.fullWarning();
             source.PlayOneShot(fail_sfx, 1);
         }
         else if (item.transform.name == "Force_Field_Pickup(Clone)")
@@ -162,30 +166,42 @@ public class Player : MonoBehaviour
 
     private IEnumerator kitchenLoadup(float spp)
     {
-        if (Input.GetAxis("Jump") > 0 && ammo < maxAmmo && kitchenReloadTimeRemaining > 0 && isInKitchen)
+        int platesGained = 0;
+
+        while (Input.GetAxis("Jump") > 0 && kitchenReloadTimeRemaining > 0 && isInKitchen)
         {
-            if (kitchenReloadTimeRemaining % spp < 0.01)
+            if (kitchenReloadTimeRemaining > (spp + 0.01f) && kitchenReloadTimeRemaining % spp < 0.01)
             {
-                ammo++;
-                UIManager.updateAmmo(ammo);
+                if (ammo >= maxAmmo)
+                {
+                    source.PlayOneShot(fail_sfx, 1);
+                    uiManager.fullWarning();
+                    break;
+                }
+                else
+                {
+                    ammo++;
+                    platesGained++;
+                    uiManager.updateKitchenMeter(platesGained, false);
+                    source.PlayOneShot(pickup_sfx, 0.5f);
+                    uiManager.updateAmmo(ammo);
+                }
             }
 
-            yield return new WaitForSeconds(0.1f);
-            kitchenReloadTimeRemaining -= 0.1f;
-            StartCoroutine(kitchenLoadup(spp));
+            yield return new WaitForSeconds(0.01f);
+            kitchenReloadTimeRemaining -= 0.01f;
         }
-        else
-        {
-            Debug.Log("Reloading Kitchen...");
-            StartCoroutine(kitchenReload());
-        }
+        StartCoroutine(kitchenReload());
     }
 
     private IEnumerator kitchenReload()
     {
+        uiManager.startReload(kitchenPlates, kitchenReloadTime);
+        kitchen.kitchenReady = false;
         yield return new WaitForSeconds(kitchenReloadTime);
+
         source.PlayOneShot(kitchen_ready_sfx, 1);
-        Debug.Log("Kitchen Ready!");
+        kitchen.kitchenReady = true;
         kitchenReady = true;
     }
 
@@ -200,7 +216,7 @@ public class Player : MonoBehaviour
         {
             if (forcefieldActive)
             {
-                deactivateForceField();
+                forcefieldActive = false;
             }
             else if (isInvincible != true)
             {
@@ -225,7 +241,7 @@ public class Player : MonoBehaviour
         {
             if (forcefieldActive)
             {
-                deactivateForceField();
+                forcefieldActive = false;
             }
             else
             {
@@ -238,24 +254,19 @@ public class Player : MonoBehaviour
 
     private IEnumerator forceFieldRoutine()
     {
-        if (forcefieldActive == true)
+        while (forcefieldActive)
         {
             // update UI
             yield return new WaitForSeconds(1);
             forcefieldTimeRemaining--;
             //Debug.Log("Seconds Remaining: " + forcefieldTimeRemaining);
 
-            if (forcefieldTimeRemaining <= 0 || forcefieldActive == false)
+            if (forcefieldTimeRemaining <= 0)
             {
-                deactivateForceField();
+                break;
             }
-
-            StartCoroutine(forceFieldRoutine());
         }
-        else
-        {
-            deactivateForceField();
-        }
+        deactivateForceField();
     }
 
     private void activateForceField()
@@ -266,14 +277,14 @@ public class Player : MonoBehaviour
             forcefieldActive = true;
             forcefield.SetActive(true);
             forcefieldTimeRemaining = forcefieldTime;
-            UIManager.updateShield(forcefieldTimeRemaining);
+            uiManager.updateShield(forcefieldTimeRemaining);
             StartCoroutine(forceFieldRoutine());
         }
         else
         {
             // force field is already active, collected another one
             forcefieldTimeRemaining = forcefieldTime;
-            UIManager.updateShield(forcefieldTimeRemaining);
+            uiManager.updateShield(forcefieldTimeRemaining);
         }
     }
 
@@ -283,7 +294,7 @@ public class Player : MonoBehaviour
         source.PlayOneShot(shield_powerdown_sfx, 0.8f);
         forcefieldActive = false;
         forcefield.SetActive(false);
-        UIManager.updateShield(0);
+        uiManager.updateShield(0);
     }
 
     public void updateKitchen(float[] kitchenData)

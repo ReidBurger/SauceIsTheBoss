@@ -9,6 +9,7 @@ TagManager:
   - Pickup
   - Enemy
   - Target
+  - Wall
   layers:
   - Default
   - TransparentFX

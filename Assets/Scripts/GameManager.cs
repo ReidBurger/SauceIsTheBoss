@@ -36,17 +36,17 @@ public class GameManager : MonoBehaviour
     private float[][] waveEnemyData =
     {
         new float[7] { 3, 5, 0.8f, 0.8f, 2.8f, 3.8f, 1 },
-        new float[7] { 2, 4, 0.94f, 0.8f, 2.2f, 3.2f, 1 },
-        new float[7] { 2.2f, 4.2f, 1.08f, 0.8f, 2.2f, 3.2f, 2 },
-        new float[7] { 1.9f, 3.5f, 1.22f, 0.8f, 2, 3, 2 },
-        new float[7] { 1, 3, 1.36f, 0.8f, 2, 3, 2 }
+        new float[7] { 2, 4, 0.85f, 0.8f, 2.2f, 3.2f, 1 },
+        new float[7] { 2.2f, 4.2f, 0.9f, 0.8f, 2.2f, 3.2f, 2 },
+        new float[7] { 1.9f, 3.5f, 0.95f, 0.8f, 2, 3, 2 },
+        new float[7] { 1, 3, 1, 0.8f, 2, 3, 2 }
     };
     // kitchen wait time, pickup time
     private float[][] waveKitchenData =
     {
-        new float[2] { 15, 3 },
-        new float[2] { 18, 0 },
-        new float[2] { 20, 0 }
+        new float[2] { 15, 1.5f },
+        new float[2] { 18, 1.5f },
+        new float[2] { 20, 1.5f }
     };
 
     [SerializeField]

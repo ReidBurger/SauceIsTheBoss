@@ -9,6 +9,15 @@ public class Projectile : MonoBehaviour
     private float downBound = -6;
     private float rightBound = 11;
     private float leftBound = -11;
+    [SerializeField]
+    private AudioClip hitWall;
+    private AudioSource audioSource;
+    private bool hasMissed = false;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -25,6 +34,21 @@ public class Projectile : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Wall") && !hasMissed)
+        {
+            hasMissed = true;
+            speed = 0;
+            if (hitWall != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(hitWall, 0.8f);
+            }
+            Destroy(gameObject, 0.2f);
+            gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
         }
     }
 }
