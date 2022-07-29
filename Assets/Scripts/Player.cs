@@ -243,8 +243,8 @@ public class Player : MonoBehaviour
             {
                 forcefieldActive = false;
             }
-            else
-            {
+            else if (isInvincible != true)
+                {
                 // You died
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
@@ -273,7 +273,7 @@ public class Player : MonoBehaviour
     {
         if (forcefieldActive == false)
         {
-            source.PlayOneShot(shield_sfx, 0.4f);
+            source.PlayOneShot(shield_sfx, 0.3f);
             forcefieldActive = true;
             forcefield.SetActive(true);
             forcefieldTimeRemaining = forcefieldTime;

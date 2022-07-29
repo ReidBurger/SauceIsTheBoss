@@ -19,20 +19,22 @@ public class EnemySpawner : MonoBehaviour
     private float enemyShootMax;
     private float enemyAccuracy = 0.8f;
     private float enemySpeed;
+    public bool bossOut = false;
 
     private IEnumerator spawnRoutine()
     {
-        yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
-        if (transform.childCount < maxEnemiesOnScreen)
+        while (true)
         {
-            GameObject newSpawn = Instantiate(spawnable, transform.position, Quaternion.identity);
-            newSpawn.transform.SetParent(transform);
+            yield return new WaitForSeconds(Random.Range(minSpawnTime, maxSpawnTime));
+            if (transform.childCount < maxEnemiesOnScreen && !bossOut)
+            {
+                GameObject newSpawn = Instantiate(spawnable, transform.position, Quaternion.identity);
+                newSpawn.transform.SetParent(transform);
 
-            Enemy thisEnemy = newSpawn.transform.GetComponent<Enemy>();
-            thisEnemy.updateBehavior(enemyShootMin, enemyShootMax, enemyAccuracy, enemySpeed);
+                Enemy thisEnemy = newSpawn.transform.GetComponent<Enemy>();
+                thisEnemy.updateBehavior(enemyShootMin, enemyShootMax, enemyAccuracy, enemySpeed);
+            }
         }
-
-        StartCoroutine(spawnRoutine());
     }
 
     public void updateBehavior(float[] waveEnemyData)

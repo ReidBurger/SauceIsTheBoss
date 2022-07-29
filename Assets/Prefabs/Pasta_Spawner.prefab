@@ -49,6 +49,7 @@ MonoBehaviour:
   minSpawnTime: 5
   maxSpawnTime: 8
   startSpawnChance: 0.5
+  spawnMaster: {fileID: 0}
 --- !u!212 &4154579756464777962
 SpriteRenderer:
   m_ObjectHideFlags: 0
