@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,6 +74,17 @@ public class GameManager : MonoBehaviour
     private SpawnCounter _spawnCounter;
     [SerializeField]
     private EnemySpawnerMaster _enemySpawnMaster;
+    [SerializeField]
+    private AudioSource preGame;
+    [SerializeField]
+    private AudioSource game;
+    [SerializeField]
+    private AudioSource postGame;
+
+    public void loadGame()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     public void increaseKills()
     {
@@ -114,7 +126,39 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        startNewWave();
+        Player.PlayerDeath += onPlayerDeath;
+        postGame.Stop();
+        preGame.Play();
+
+        // if scene is game, start new wave
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game"))
+        {
+            preGame.Stop();
+            game.Play();
+            startNewWave();
+        }
+    }
+
+    private void onPlayerDeath()
+    {
+        game.Stop();
+        postGame.Play();
+
+        int thrown = 0;
+        Player _player = player.GetComponent<Player>();
+        if (_player != null)
+        {
+            thrown = _player.totalThrown;
+        }
+
+        int totalKills = kills;
+        for (int wave = 0; wave < currentWave - 1; wave++)
+        {
+            totalKills += (int)waveKillsData[findIndex(wave, waveKillsData.Length)];
+        }
+
+        uiManager.displayGameOver(true, totalKills, thrown);
     }
 
     public void startNewWave()
@@ -163,5 +207,10 @@ public class GameManager : MonoBehaviour
 
         uiManager.updateKillsCounter(kills, (int)waveKillsData[findIndex(currentWave, waveKillsData.Length)]);
 
+    }
+
+    private void OnDestroy()
+    {
+        Player.PlayerDeath -= onPlayerDeath;
     }
 }

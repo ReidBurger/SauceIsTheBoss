@@ -6,8 +6,6 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject shieldMeter;
-    [SerializeField]
     private GameObject[] ammoSprites;
     [SerializeField]
     private GameObject[] progressBarSprites;
@@ -23,6 +21,10 @@ public class UIManager : MonoBehaviour
     private Sprite[] round_num_sprites;
     [SerializeField]
     private GameObject[] kitchenMeterSprites;
+    [SerializeField]
+    private GameObject[] shieldSprites;
+    [SerializeField]
+    private GameObject gameOverScreen;
 
     public void emptyWarning()
     {
@@ -84,14 +86,17 @@ public class UIManager : MonoBehaviour
         StartCoroutine(Fade(round_txt, 2));
     }
 
-    public void updateShield(int time)
+    public void updateShield(int time, int total)
     {
-        // stop animation
+        int ratioLeft = time * 8 / total;
+        if (ratioLeft > total) ratioLeft = total;
 
-        if (time > 0)
+        foreach (GameObject sprite in shieldSprites)
         {
-            // play animation for time seconds
+            sprite.SetActive(false);
         }
+
+        shieldSprites[ratioLeft].SetActive(true);
     }
 
     public void updateKillsCounter(int kills, int quota)
@@ -141,5 +146,24 @@ public class UIManager : MonoBehaviour
             if (plates == 6) plates = -6;
             kitchenMeterSprites[plates + 6].SetActive(true);
         }
+    }
+
+    public void displayGameOver(bool display, int kills = 0, int thrown = 1)
+    {
+        Transform _scoreInfo = gameOverScreen.transform.Find("ScoreInfo");
+        if (_scoreInfo != null)
+        {
+            if (thrown == 0) thrown = 1;
+            int accuracy = kills * 100 / thrown;
+            float accuracyMultiplier = (float)accuracy * 4.0f / 100.0f;
+            int finalScore = (int)(kills * 10 * accuracyMultiplier);
+
+            Text text = _scoreInfo.GetComponent<Text>();
+            text.text = "Enemies Splatted: " + kills + " (+" + kills * 10 + ")\nSauce Slung: " +
+                thrown + "\nAccuracy: " + accuracy + "% (x" + accuracyMultiplier +
+                ")\n______________________\n\nFinal Score: " + finalScore;
+        }
+
+        gameOverScreen.SetActive(display);
     }
 }

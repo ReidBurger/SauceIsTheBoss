@@ -49,7 +49,10 @@ public class Player : MonoBehaviour
     private bool instantAcceleration = false;
     private float oldHorizontalAcceleration = 0;
     private float oldVerticalAcceleration = 0;
+    public int totalThrown = 0;
 
+    public delegate void PlayerDies();
+    public static event PlayerDies PlayerDeath;
 
     // Start is called before the first frame update
     void Start()
@@ -110,6 +113,7 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && ammo > 0)
         {
             ammo--;
+            totalThrown++;
             source.PlayOneShot(throw_sfx, 1);
             uiManager.updateAmmo(ammo);
             Instantiate(pasta, transform.position, transform.rotation);
@@ -221,6 +225,7 @@ public class Player : MonoBehaviour
             else if (isInvincible != true)
             {
                 // You died
+                PlayerDeath?.Invoke();
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
             }
@@ -246,6 +251,7 @@ public class Player : MonoBehaviour
             else if (isInvincible != true)
                 {
                 // You died
+                PlayerDeath?.Invoke();
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
             }
@@ -259,7 +265,7 @@ public class Player : MonoBehaviour
             // update UI
             yield return new WaitForSeconds(1);
             forcefieldTimeRemaining--;
-            //Debug.Log("Seconds Remaining: " + forcefieldTimeRemaining);
+            uiManager.updateShield(forcefieldTimeRemaining, forcefieldTime);
 
             if (forcefieldTimeRemaining <= 0)
             {
@@ -277,14 +283,14 @@ public class Player : MonoBehaviour
             forcefieldActive = true;
             forcefield.SetActive(true);
             forcefieldTimeRemaining = forcefieldTime;
-            uiManager.updateShield(forcefieldTimeRemaining);
+            uiManager.updateShield(forcefieldTimeRemaining, forcefieldTime);
             StartCoroutine(forceFieldRoutine());
         }
         else
         {
             // force field is already active, collected another one
             forcefieldTimeRemaining = forcefieldTime;
-            uiManager.updateShield(forcefieldTimeRemaining);
+            uiManager.updateShield(forcefieldTimeRemaining, forcefieldTime);
         }
     }
 
@@ -294,7 +300,7 @@ public class Player : MonoBehaviour
         source.PlayOneShot(shield_powerdown_sfx, 0.8f);
         forcefieldActive = false;
         forcefield.SetActive(false);
-        uiManager.updateShield(0);
+        uiManager.updateShield(0, forcefieldTime);
     }
 
     public void updateKitchen(float[] kitchenData)

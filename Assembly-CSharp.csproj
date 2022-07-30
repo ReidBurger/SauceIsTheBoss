@@ -56,6 +56,7 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/SpawnCounter.cs" />
     <Compile Include="Assets/Scripts/Kitchen.cs" />
     <Compile Include="Assets/Scripts/UIManager.cs" />
     <Compile Include="Assets/Scripts/Enemy.cs" />
@@ -66,14 +67,14 @@
     <Compile Include="Assets/Scripts/EnemyPathfinding.cs" />
     <Compile Include="Assets/Scripts/Freeze_Rotation.cs" />
     <Compile Include="Assets/Scripts/CursorObj.cs" />
+    <Compile Include="Assets/Scripts/BossManager.cs" />
+    <Compile Include="Assets/Scripts/EnemySpawnerMaster.cs" />
     <Compile Include="Assets/Scripts/Spawner.cs" />
+    <Compile Include="Assets/Scripts/Boss.cs" />
     <Compile Include="Assets/Scripts/GameManager.cs" />
     <Compile Include="Assets/Scripts/Pasta.cs" />
     <Compile Include="Assets/Scripts/EnemySpawner.cs" />
-    <Compile Include="Assets/Scripts/SpawnCounter.cs" />
-    <Compile Include="Assets/Scripts/EnemySpawnerMaster.cs" />
-    <Compile Include="Assets/Scripts/BossManager.cs" />
-    <Compile Include="Assets/Scripts/Boss.cs" />
+    <Compile Include="Assets/Scripts/RestartGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
