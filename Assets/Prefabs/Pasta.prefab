@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpeed: 12
   splat_sfx: {fileID: 8300000, guid: 32a4b7fda04cd402792c8d0105ba913c, type: 3}
+  splat_anim: {fileID: 7471388641399734037, guid: 2c0e2a1118e8a4eeca7a1ae1b25cd577, type: 3}
 --- !u!58 &4393900126267326391
 CircleCollider2D:
   m_ObjectHideFlags: 0

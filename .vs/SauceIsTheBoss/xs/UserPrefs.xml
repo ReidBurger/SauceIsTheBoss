@@ -1,16 +1,15 @@
 ﻿<Properties StartupConfiguration="{5724F05E-A54B-BCA0-0347-A439C9E2495B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/RestartGame.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Enemy.cs" Line="11" Column="21" IsPinned="True" />
+      <File FileName="Assets/Scripts/Enemy.cs" Line="1" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/Pasta.cs" />
       <File FileName="Assets/Scripts/UIManager.cs" />
       <File FileName="Assets/Scripts/Player.cs" />
-      <File FileName="Assets/Scripts/Pasta.cs" />
-      <File FileName="Assets/Scripts/GameManager.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="104" Column="27" />
       <File FileName="Assets/Scripts/EnemySpawnerMaster.cs" />
-      <File FileName="Assets/Scripts/EnemySpawner.cs" />
-      <File FileName="Assets/Scripts/BossManager.cs" />
-      <File FileName="Assets/Scripts/Boss.cs" />
-      <File FileName="Assets/Scripts/RestartGame.cs" Line="10" Column="35" />
+      <File FileName="Assets/Scripts/Dissolve.cs" />
+      <File FileName="Assets/Scripts/RestartGame.cs" />
+      <File FileName="Assets/Scripts/StartGame.cs" Line="4" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -26,7 +25,7 @@
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True">
-                <Node name="RestartGame.cs" selected="True" />
+                <Node name="GameManager.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -36,7 +35,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ef5d2b84-ff4c-43d2-a7e4-39a5a139f24d" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6b8f9825-ec65-4e6d-8f92-b53d6c2265b0" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

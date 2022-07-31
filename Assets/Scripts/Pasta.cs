@@ -12,6 +12,8 @@ public class Pasta : MonoBehaviour
     private AudioClip splat_sfx;
     private AudioSource source;
     private bool hasSplat = false;
+    [SerializeField]
+    private GameObject splat_anim;
 
     private void Start()
     {
@@ -46,6 +48,7 @@ public class Pasta : MonoBehaviour
         hasSplat = true;
         source.PlayOneShot(splat_sfx, 0.5f);
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        Instantiate(splat_anim, transform.position, Quaternion.identity);
         Destroy(gameObject, 0.4f);
     }
 }

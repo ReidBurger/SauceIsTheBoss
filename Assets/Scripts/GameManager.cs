@@ -81,6 +81,26 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private AudioSource postGame;
 
+    public void Start()
+    {
+        if (player != null)
+        {
+            Player.PlayerDeath += onPlayerDeath;
+        }
+
+        if (postGame.isPlaying) postGame.Stop();
+        preGame.Play();
+
+        // if scene is game, start new wave
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game"))
+        {
+            preGame.Stop();
+            game.Play();
+            startNewWave();
+        }
+    }
+
     public void loadGame()
     {
         SceneManager.LoadScene(0);
@@ -121,22 +141,6 @@ public class GameManager : MonoBehaviour
         else
         {
             return wave;
-        }
-    }
-
-    public void Start()
-    {
-        Player.PlayerDeath += onPlayerDeath;
-        postGame.Stop();
-        preGame.Play();
-
-        // if scene is game, start new wave
-
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Game"))
-        {
-            preGame.Stop();
-            game.Play();
-            startNewWave();
         }
     }
 
