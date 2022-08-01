@@ -16,11 +16,11 @@ public class GameManager : MonoBehaviour
     // pasta min spawn time, max spawn time, pasta on screen
     private float[][] wavePastaData =
     {
-        new float[3] { 2.2f, 4.2f, 5 },
-        new float[3] { 2.5f, 4.5f, 5 },
-        new float[3] { 2.8f, 4.8f, 4 },
-        new float[3] { 3.1f, 5.1f, 4 },
-        new float[3] { 3.3f, 5.3f, 4 }
+        new float[3] { 3.5f, 5.5f, 5 },
+        new float[3] { 3.7f, 5.7f, 4 },
+        new float[3] { 4, 5.8f, 4 },
+        new float[3] { 4.2f, 6, 4 },
+        new float[3] { 3, 4, 4 }
 
     };
     // shield min spawn time, max spawn time, active time
@@ -30,17 +30,17 @@ public class GameManager : MonoBehaviour
         new float[3] { 22, 28, 8.5f },
         new float[3] { 25, 30, 8 },
         new float[3] { 28, 32, 7.8f },
-        new float[3] { 30, 35, 7.5f }
+        new float[3] { 26, 30, 8 }
     };
     // enemy min spawn time, max spawn time, speed, accuracy, shoot time min,
     // shoot time max, max enemies on screen per spawner, open new door
     private float[][] waveEnemyData =
     {
-        new float[8] { 1.8f, 3.5f, 0.8f, 0.8f, 2.8f, 3.8f, 1, 1 },
-        new float[8] { 3.5f, 4.5f, 0.85f, 0.8f, 2.2f, 3.2f, 1, 1 },
+        new float[8] { 1.8f, 2.8f, 0.8f, 0.8f, 1.6f, 2.5f, 1, 1 },
+        new float[8] { 3.5f, 4.5f, 0.85f, 0.8f, 2, 3, 1, 1 },
         new float[8] { 3, 4, 0.9f, 0.8f, 2.2f, 3.2f, 2, 0 },
         new float[8] { 3.2f, 4.2f, 0.95f, 0.8f, 2, 3, 1, 1 },
-        new float[8] { 3, 4, 1, 0.8f, 2, 3, 2, 0 }
+        new float[8] { 3.4f, 4.6f, 1, 0.8f, 2, 3, 2, 0 }
     };
     // kitchen wait time, pickup time
     private float[][] waveKitchenData =
@@ -54,10 +54,10 @@ public class GameManager : MonoBehaviour
     // boss run speed, run time, slow speed, fire rate, accuracy, slow time
     private float[][] waveBossData =
     {
-        new float[6] { 2, 1.3f, 0, 0.35f, 0.7f, 2 },
-        new float[6] { 2, 1.3f, 0.2f, 0.3f, 0.7f, 2 },
-        new float[6] { 2, 1.3f, 0.4f, 0.25f, 0.7f, 2 },
-        new float[6] { 2.2f, 1.2f, 0.5f, 0.35f, 0.7f, 2 }
+        new float[6] { 2.2f, 1.3f, 0, 0.35f, 0.7f, 2 },
+        new float[6] { 2.3f, 1.3f, 0.2f, 0.3f, 0.7f, 2 },
+        new float[6] { 2.4f, 1.3f, 0.4f, 0.25f, 0.7f, 2 },
+        new float[6] { 2.6f, 1.2f, 0.5f, 0.25f, 0.7f, 2 }
     };
 
     [SerializeField]

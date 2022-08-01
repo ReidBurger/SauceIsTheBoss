@@ -5,11 +5,12 @@
       <File FileName="Assets/Scripts/Pasta.cs" />
       <File FileName="Assets/Scripts/UIManager.cs" />
       <File FileName="Assets/Scripts/Player.cs" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="104" Column="27" />
-      <File FileName="Assets/Scripts/EnemySpawnerMaster.cs" />
-      <File FileName="Assets/Scripts/Dissolve.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="60" Column="56" />
+      <File FileName="Assets/Scripts/EnemySpawnerMaster.cs" Line="36" Column="105" />
+      <File FileName="Assets/Scripts/Dissolve.cs" Line="8" Column="31" />
       <File FileName="Assets/Scripts/RestartGame.cs" />
-      <File FileName="Assets/Scripts/StartGame.cs" Line="4" Column="35" />
+      <File FileName="Assets/Scripts/StartGame.cs" />
+      <File FileName="Assets/Scripts/Freeze_Rotation.cs" Line="11" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -35,7 +36,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6b8f9825-ec65-4e6d-8f92-b53d6c2265b0" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6dca7c81-946d-49b3-9256-192834a9ce9b" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
