@@ -478,6 +478,7 @@ MonoBehaviour:
   isInvincible: 0
   instantAcceleration: 0
   totalThrown: 0
+  animator: {fileID: 1178499907}
 --- !u!212 &103725042
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4832,7 +4833,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 681209107
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &583850858
@@ -5483,7 +5484,7 @@ GameObject:
   - component: {fileID: 749174564}
   - component: {fileID: 749174566}
   - component: {fileID: 749174565}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Round_txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6420,7 +6421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1005263112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6928,7 +6929,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178499903}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7760,7 +7761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1713750709
 Transform:
   m_ObjectHideFlags: 0
@@ -7996,7 +7997,7 @@ GameObject:
   - component: {fileID: 1765487876}
   - component: {fileID: 1765487878}
   - component: {fileID: 1765487877}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Round_num
   m_TagString: Untagged
   m_Icon: {fileID: 0}

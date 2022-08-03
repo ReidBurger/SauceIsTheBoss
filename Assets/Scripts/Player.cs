@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
     private float oldHorizontalAcceleration = 0;
     private float oldVerticalAcceleration = 0;
     public int totalThrown = 0;
+    [SerializeField]
+    private Animator animator;
 
     public delegate void PlayerDies();
     public static event PlayerDies PlayerDeath;
@@ -97,6 +99,9 @@ public class Player : MonoBehaviour
             oldHorizontalAcceleration = Input.GetAxis("Horizontal");
             oldVerticalAcceleration = Input.GetAxis("Vertical");
         }
+
+        animator.SetFloat("Horizontal_Velocity", horizontalInput);
+        animator.SetFloat("Vertical_Velocity", verticalInput);
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
