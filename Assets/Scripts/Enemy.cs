@@ -18,12 +18,20 @@ public class Enemy : MonoBehaviour
     private AudioSource source;
     [SerializeField]
     private GameObject gun;
+    [SerializeField]
+    private Animator animator;
+    private Vector2 previousPosition;
+    private Vector2 currentPosition;
+    private GameObject kitchen;
 
     // Start is called before the first frame update
     void Start()
     {
         source = transform.GetComponent<AudioSource>();
         player = GameObject.FindWithTag("Player");
+        kitchen = GameObject.FindWithTag("Target");
+        previousPosition = transform.position;
+        InvokeRepeating("updateAnimation", 0, 0.5f);
         StartCoroutine(shootRoutine());
     }
 
@@ -52,6 +60,8 @@ public class Enemy : MonoBehaviour
     private void enemyDie()
     {
         StopAllCoroutines();
+        Pathfinding.AIPath aiPath = gameObject.GetComponent<Pathfinding.AIPath>();
+        aiPath.maxSpeed = 0;
         source.PlayOneShot(death_sfx, 1);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Collider2D>().enabled = false;
@@ -99,9 +109,50 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void faceKitchen()
+    {
+        Vector3 newPos = new Vector3(kitchen.transform.position.x, kitchen.transform.position.y, -9.7f);
+
+        transform.LookAt(newPos, Vector3.forward);
+        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z * -1);
+
+        if (transform.eulerAngles.z > 180)
+        {
+            // facing right
+            gun.transform.localScale = new Vector2(8, 8);
+        }
+        else
+        {
+            // facing left
+            gun.transform.localScale = new Vector2(8, -8);
+        }
+    }
+
+    private void updateAnimation()
+    {
+        currentPosition = transform.position;
+        Vector2 velocity = currentPosition - previousPosition;
+
+        animator.SetFloat("Horizontal_Velocity", velocity.x);
+        animator.SetFloat("Vertical_Velocity", velocity.y);
+
+        //Debug.Log(velocity.x + " " + velocity.y);
+
+        previousPosition = currentPosition;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (player != null) facePlayer();
+        else
+        {
+            faceKitchen();
+        }
+        if (Vector2.Distance(transform.position, kitchen.transform.position) < 0.1f)
+        {
+            // Game Over
+            Destroy(gameObject);
+        }
     }
 }

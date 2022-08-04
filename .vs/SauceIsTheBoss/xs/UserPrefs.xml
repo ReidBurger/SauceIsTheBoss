@@ -1,12 +1,16 @@
 ﻿<Properties StartupConfiguration="{5724F05E-A54B-BCA0-0347-A439C9E2495B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Enemy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Flash.cs">
     <Files>
-      <File FileName="Assets/Scripts/Enemy.cs" Line="64" Column="81" IsPinned="True" />
-      <File FileName="Assets/Scripts/Pasta.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/UIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player.cs" Line="100" Column="65" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="19" Column="39" />
-      <File FileName="Assets/Scripts/EnemySpawnerMaster.cs" Line="36" Column="105" />
+      <File FileName="Assets/Scripts/Enemy.cs" Line="152" Column="83" IsPinned="True" />
+      <File FileName="Assets/Scripts/Pasta.cs" />
+      <File FileName="Assets/Scripts/UIManager.cs" />
+      <File FileName="Assets/Scripts/Player.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" />
+      <File FileName="Assets/Scripts/EnemySpawnerMaster.cs" />
+      <File FileName="Assets/Scripts/EnemyPathfinding.cs" />
+      <File FileName="Assets/Scripts/Boss.cs" />
+      <File FileName="Assets/Scripts/Pickup.cs" Line="32" Column="35" />
+      <File FileName="Assets/Scripts/Flash.cs" Line="10" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -22,7 +26,7 @@
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True">
-                <Node name="Enemy.cs" selected="True" />
+                <Node name="Flash.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -32,7 +36,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="99082058-401e-4dc8-ad39-1f23f4270782" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="8fc8f35e-f12e-49fa-9eb2-0017a7cd2665" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

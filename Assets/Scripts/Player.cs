@@ -284,7 +284,7 @@ public class Player : MonoBehaviour
     {
         if (forcefieldActive == false)
         {
-            source.PlayOneShot(shield_sfx, 0.3f);
+            source.PlayOneShot(shield_sfx, 0.2f);
             forcefieldActive = true;
             forcefield.SetActive(true);
             forcefieldTimeRemaining = forcefieldTime;
@@ -302,7 +302,7 @@ public class Player : MonoBehaviour
     private void deactivateForceField()
     {
         source.Stop();
-        source.PlayOneShot(shield_powerdown_sfx, 0.8f);
+        source.PlayOneShot(shield_powerdown_sfx, 0.6f);
         forcefieldActive = false;
         forcefield.SetActive(false);
         uiManager.updateShield(0, forcefieldTime);

@@ -22,13 +22,21 @@ public class Boss : MonoBehaviour
     private GameObject gun;
     private Pathfinding.AIPath aiPath;
     private bool canShoot = false;
+    private GameObject kitchen;
+    [SerializeField]
+    private Animator animator;
+    private Vector2 previousPosition;
+    private Vector2 currentPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         source = transform.GetComponent<AudioSource>();
         player = GameObject.FindWithTag("Player");
+        kitchen = GameObject.FindWithTag("Target");
         aiPath = gameObject.GetComponent<Pathfinding.AIPath>();
+        previousPosition = transform.position;
+        InvokeRepeating("updateAnimation", 0, 0.2f);
         StartCoroutine(moveRoutine());
     }
 
@@ -48,6 +56,9 @@ public class Boss : MonoBehaviour
         {
             GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
             if (gameManager != null) gameManager.startNewWave();
+
+            Pathfinding.AIPath aiPath = gameObject.GetComponent<Pathfinding.AIPath>();
+            aiPath.maxSpeed = 0;
 
             Destroy(collision.gameObject);
             enemyDie();
@@ -120,9 +131,49 @@ public class Boss : MonoBehaviour
         }
     }
 
+    private void faceKitchen()
+    {
+        Vector3 newPos = new Vector3(kitchen.transform.position.x, kitchen.transform.position.y, -9.7f);
+
+        transform.LookAt(newPos, Vector3.forward);
+        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z * -1);
+
+        if (transform.eulerAngles.z > 180)
+        {
+            // facing right
+            gun.transform.localScale = new Vector2(8, 8);
+        }
+        else
+        {
+            // facing left
+            gun.transform.localScale = new Vector2(8, -8);
+        }
+    }
+
+    private void updateAnimation()
+    {
+        currentPosition = transform.position;
+        Vector2 velocity = currentPosition - previousPosition;
+
+        animator.SetFloat("Horizontal_Velocity", velocity.x);
+        animator.SetFloat("Vertical_Velocity", velocity.y);
+
+        previousPosition = currentPosition;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (player != null) facePlayer();
+        else
+        {
+            faceKitchen();
+        }
+
+        if (Vector2.Distance(transform.position, kitchen.transform.position) < 0.1f)
+        {
+            // Game Over
+            Destroy(gameObject);
+        }
     }
 }

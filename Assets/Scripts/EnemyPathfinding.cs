@@ -80,5 +80,5 @@ namespace Pathfinding
 				if (ai != null) ai.destination = GameObject.FindWithTag("Target").transform.position;
 			}
 		}
-	}
+    }
 }

@@ -44,7 +44,7 @@ public class EnemySpawnerMaster : MonoBehaviour
 
             if (_audioSource != null)
             {
-                _audioSource.PlayOneShot(shatter, 1);
+                _audioSource.PlayOneShot(shatter, 0.8f);
             }
         }
     }

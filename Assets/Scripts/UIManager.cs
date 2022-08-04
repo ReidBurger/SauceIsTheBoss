@@ -153,8 +153,11 @@ public class UIManager : MonoBehaviour
         Transform _scoreInfo = gameOverScreen.transform.Find("ScoreInfo");
         if (_scoreInfo != null)
         {
-            if (thrown == 0) thrown = 1;
-            int accuracy = kills * 100 / thrown;
+            int accuracy = 0;
+            if (thrown != 0)
+            {
+                accuracy = kills * 100 / thrown;
+            }
             float accuracyMultiplier = (float)accuracy * 4.0f / 100.0f;
             int finalScore = (int)(kills * 10 * accuracyMultiplier);
 
