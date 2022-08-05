@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     private Vector2 currentPosition;
     private GameObject kitchen;
 
+    public delegate void KitchenSuccess();
+    public static event KitchenSuccess KitchenReached;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +62,7 @@ public class Enemy : MonoBehaviour
 
     private void enemyDie()
     {
+        animator.SetTrigger("Is_Dead");
         StopAllCoroutines();
         Pathfinding.AIPath aiPath = gameObject.GetComponent<Pathfinding.AIPath>();
         aiPath.maxSpeed = 0;
@@ -136,8 +140,6 @@ public class Enemy : MonoBehaviour
         animator.SetFloat("Horizontal_Velocity", velocity.x);
         animator.SetFloat("Vertical_Velocity", velocity.y);
 
-        //Debug.Log(velocity.x + " " + velocity.y);
-
         previousPosition = currentPosition;
     }
 
@@ -149,9 +151,15 @@ public class Enemy : MonoBehaviour
         {
             faceKitchen();
         }
+
+
         if (Vector2.Distance(transform.position, kitchen.transform.position) < 0.1f)
         {
             // Game Over
+            if (player != null)
+            {
+                KitchenReached?.Invoke();
+            }
             Destroy(gameObject);
         }
     }

@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     // pasta min spawn time, max spawn time, pasta on screen
     private float[][] wavePastaData =
     {
-        new float[3] { 3.5f, 5.5f, 5 },
-        new float[3] { 3.7f, 5.7f, 4 },
+        new float[3] { 4, 6, 5 },
+        new float[3] { 4.2f, 6.4f, 4 },
         new float[3] { 4, 5.8f, 4 },
         new float[3] { 4.2f, 6, 4 },
         new float[3] { 3, 4, 4 }
@@ -85,7 +85,9 @@ public class GameManager : MonoBehaviour
     {
         if (player != null)
         {
-            Player.PlayerDeath += onPlayerDeath;
+            Player.PlayerDeath += onGameOver;
+            Enemy.KitchenReached += onGameOver;
+            Boss.KitchenReached += onGameOver;
         }
 
         if (postGame.isPlaying) postGame.Stop();
@@ -144,10 +146,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void onPlayerDeath()
+    private void onGameOver()
     {
         game.Stop();
         postGame.Play();
+
+        player.SetActive(false);
 
         int thrown = 0;
         Player _player = player.GetComponent<Player>();
@@ -215,6 +219,8 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        Player.PlayerDeath -= onPlayerDeath;
+        Player.PlayerDeath -= onGameOver;
+        Enemy.KitchenReached -= onGameOver;
+        Boss.KitchenReached -= onGameOver;
     }
 }

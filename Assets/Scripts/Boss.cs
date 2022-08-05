@@ -27,6 +27,8 @@ public class Boss : MonoBehaviour
     private Animator animator;
     private Vector2 previousPosition;
     private Vector2 currentPosition;
+    public delegate void KitchenSuccess();
+    public static event KitchenSuccess KitchenReached;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +69,7 @@ public class Boss : MonoBehaviour
 
     private void enemyDie()
     {
+        animator.SetTrigger("Is_Dead");
         StopAllCoroutines();
         source.PlayOneShot(death_sfx, 1);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -92,9 +95,7 @@ public class Boss : MonoBehaviour
 
     private IEnumerator shootRoutine()
     {
-        if (player != null)
-        {
-            while (canShoot)
+            while (canShoot && player != null)
             {
                 // worst miss angle from 0 to 90 based on the accuracy
                 float maxMissAngle = Mathf.Abs(accuracy - 1) * 90;
@@ -109,7 +110,6 @@ public class Boss : MonoBehaviour
 
                 yield return new WaitForSeconds(fireRate);
             }
-        }
     }
 
     private void facePlayer()
@@ -173,6 +173,7 @@ public class Boss : MonoBehaviour
         if (Vector2.Distance(transform.position, kitchen.transform.position) < 0.1f)
         {
             // Game Over
+            KitchenReached?.Invoke();
             Destroy(gameObject);
         }
     }
