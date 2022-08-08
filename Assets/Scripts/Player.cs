@@ -178,13 +178,15 @@ public class Player : MonoBehaviour
     }
 
     private IEnumerator kitchenLoadup(float spp)
-    {
+    {;
         int platesGained = 0;
 
         while (Input.GetAxis("Jump") > 0 && kitchenReloadTimeRemaining > 0 && isInKitchen)
         {
-            if (kitchenReloadTimeRemaining > (spp + 0.01f) && kitchenReloadTimeRemaining % spp < 0.01)
+            kitchenReloadTimeRemaining -= Time.deltaTime;
+            if (kitchenReloadTimeRemaining > 0.01f && kitchenReloadTimeRemaining < (6 - platesGained) * spp)
             {
+                kitchenReloadTimeRemaining -= Time.deltaTime;
                 if (ammo >= maxAmmo)
                 {
                     source.PlayOneShot(fail_sfx, sfx_volume * 1);
@@ -200,9 +202,7 @@ public class Player : MonoBehaviour
                     uiManager.updateAmmo(ammo);
                 }
             }
-
-            yield return new WaitForSeconds(0.01f);
-            kitchenReloadTimeRemaining -= 0.01f;
+            yield return null;
         }
         StartCoroutine(kitchenReload());
     }

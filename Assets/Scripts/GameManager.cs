@@ -45,11 +45,11 @@ public class GameManager : MonoBehaviour
     // kitchen wait time, pickup time
     private float[][] waveKitchenData =
     {
-        new float[2] { 15, 1.5f },
-        new float[2] { 14, 1.5f },
-        new float[2] { 12, 1.5f },
-        new float[2] { 10, 1.5f },
-        new float[2] { 8, 1.5f }
+        new float[2] { 15, 2 },
+        new float[2] { 14, 2 },
+        new float[2] { 12, 2 },
+        new float[2] { 10, 2 },
+        new float[2] { 8, 2 }
     };
     // boss run speed, run time, slow speed, fire rate, accuracy, slow time
     private float[][] waveBossData =
@@ -305,7 +305,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (Time.timeScale != 0)
             {

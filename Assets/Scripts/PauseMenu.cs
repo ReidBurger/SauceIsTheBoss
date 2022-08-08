@@ -132,7 +132,7 @@ public class PauseMenu : MonoBehaviour
             updateSettings();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
         {
             if (selected == 3)
             {
