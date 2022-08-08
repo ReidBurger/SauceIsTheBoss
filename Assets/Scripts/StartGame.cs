@@ -7,7 +7,7 @@ public class StartGame : MonoBehaviour
 {
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) && Time.timeScale != 0)
         {
             SceneManager.LoadScene(1);
         }

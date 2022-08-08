@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 0.6037736, g: 0.5952296, b: 0.5952296, a: 1}
   m_FlipX: 0
@@ -329,6 +329,7 @@ MonoBehaviour:
   death_sfx: {fileID: 8300000, guid: c7f2b1fa59d9d4e09b5303519c3dbc8a, type: 3}
   gun: {fileID: 1089061868572914665}
   animator: {fileID: 8872793149476842480}
+  sfx_volume: 1
 --- !u!1 &1089061868572914665
 GameObject:
   m_ObjectHideFlags: 0

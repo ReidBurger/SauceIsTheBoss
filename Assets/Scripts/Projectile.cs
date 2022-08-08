@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
     private AudioClip hitWall;
     private AudioSource audioSource;
     private bool hasMissed = false;
+    public float sfx_volume = 1;
 
     private void Start()
     {
@@ -45,7 +46,7 @@ public class Projectile : MonoBehaviour
             speed = 0;
             if (hitWall != null && audioSource != null)
             {
-                audioSource.PlayOneShot(hitWall, 0.8f);
+                audioSource.PlayOneShot(hitWall, sfx_volume * 0.8f);
             }
             Destroy(gameObject, 0.2f);
             gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;

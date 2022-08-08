@@ -80,9 +80,17 @@ public class GameManager : MonoBehaviour
     private AudioSource game;
     [SerializeField]
     private AudioSource postGame;
+    [SerializeField]
+    private GameObject pauseMenu;
+    [SerializeField]
+    private GameObject startScreen;
+    [SerializeField]
+    private GameObject gameOverScreen;
 
     public void Start()
     {
+        updateSettings();
+
         if (player != null)
         {
             Player.PlayerDeath += onGameOver;
@@ -100,6 +108,77 @@ public class GameManager : MonoBehaviour
             preGame.Stop();
             game.Play();
             startNewWave();
+        }
+    }
+
+    public void updateSettings()
+    {
+        float setSfxVol = MainManager.Instance.sfx_vol / 10f;
+        // get info from MainManager and update all music, sfx, movement
+        if (player != null)
+        {
+            Player p = player.GetComponent<Player>();
+            p.sfx_volume = setSfxVol;
+            p.instantAcceleration = MainManager.Instance.instant_acceleration;
+        }
+
+        if (_enemySpawnMaster != null)
+        {
+            EnemySpawnerMaster esm = _enemySpawnMaster.GetComponent<EnemySpawnerMaster>();
+            esm.sfx_volume = setSfxVol;
+            esm.updateSpawnerSFX();
+            BossManager bm = _enemySpawnMaster.GetComponent<BossManager>();
+            bm.sfx_volume = setSfxVol;
+        }
+
+        float setMusicVol = MainManager.Instance.music_vol / 10f;
+        postGame.volume = setMusicVol;
+        game.volume = setMusicVol;
+        preGame.volume = setMusicVol;
+        //Debug.Log("Update: " + setSfxVol + "|" + setMusicVol);
+    }
+
+    private void pauseGame()
+    {
+        Time.timeScale = 0;
+        pauseMenu.SetActive(true);
+        if (player != null)
+        {
+            Player p = player.GetComponent<Player>();
+            p.cursorObj.SetActive(false);
+        }
+        if (startScreen != null)
+        {
+            startScreen.SetActive(false);
+        }
+        if (gameOverScreen != null && gameOverScreen.activeSelf)
+        {
+            gameOverScreen.SetActive(false);
+        }
+    }
+
+    private void unpauseGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+        if (startScreen != null)
+        {
+            startScreen.SetActive(true);
+        }
+        else
+        {
+            // if there isn't a start screen, then it must be "game", so unhide the cursor
+            if (player != null)
+            {
+                Player p = player.GetComponent<Player>();
+                p.cursorObj.SetActive(true);
+            }
+
+            if (player == null)
+            {
+                // player has died
+                gameOverScreen.SetActive(true);
+            }
         }
     }
 
@@ -222,5 +301,20 @@ public class GameManager : MonoBehaviour
         Player.PlayerDeath -= onGameOver;
         Enemy.KitchenReached -= onGameOver;
         Boss.KitchenReached -= onGameOver;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Time.timeScale != 0)
+            {
+                pauseGame();
+            }
+            else
+            {
+                unpauseGame();
+            }
+        }
     }
 }

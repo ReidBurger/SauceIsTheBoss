@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     private Vector2 previousPosition;
     private Vector2 currentPosition;
     private GameObject kitchen;
+    public float sfx_volume = 1;
 
     public delegate void KitchenSuccess();
     public static event KitchenSuccess KitchenReached;
@@ -66,7 +67,7 @@ public class Enemy : MonoBehaviour
         StopAllCoroutines();
         Pathfinding.AIPath aiPath = gameObject.GetComponent<Pathfinding.AIPath>();
         aiPath.maxSpeed = 0;
-        source.PlayOneShot(death_sfx, 1);
+        source.PlayOneShot(death_sfx, sfx_volume * 1);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Collider2D>().enabled = false;
         gun.SetActive(false);
@@ -87,8 +88,10 @@ public class Enemy : MonoBehaviour
             transform.up = player.transform.position - transform.position;
             transform.Rotate(new Vector3(0, 0, angleOffset));
 
-            source.PlayOneShot(shoot_sfx, 1);
+            source.PlayOneShot(shoot_sfx, sfx_volume * 1);
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
+            Bullet bl = newBullet.GetComponent<Bullet>();
+            bl.sfx_volume = sfx_volume;
 
             StartCoroutine(shootRoutine());
         }

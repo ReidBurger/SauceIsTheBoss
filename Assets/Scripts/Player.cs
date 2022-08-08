@@ -45,13 +45,15 @@ public class Player : MonoBehaviour
     private bool playingFailSFX = false;
     [SerializeField]
     private bool isInvincible = false;
-    [SerializeField]
-    private bool instantAcceleration = false;
+    public bool instantAcceleration = false;
     private float oldHorizontalAcceleration = 0;
     private float oldVerticalAcceleration = 0;
     public int totalThrown = 0;
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    public GameObject cursorObj;
+    public float sfx_volume = 1;
 
     public delegate void PlayerDies();
     public static event PlayerDies PlayerDeath;
@@ -59,6 +61,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sfx_volume = MainManager.Instance.sfx_vol;
+        instantAcceleration = MainManager.Instance.instant_acceleration;
         transform.position = startingPosition;
         uiManager = UI_Manager.GetComponent<UIManager>();
         source = transform.GetComponent<AudioSource>();
@@ -108,9 +112,7 @@ public class Player : MonoBehaviour
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
 
         // Change where player looks
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        ray.origin = new Vector3(ray.origin.x, ray.origin.y, 0);
-        transform.up = ray.origin - transform.position;
+        transform.up = cursorObj.transform.position - transform.position;
     }
 
     private void shootPasta()
@@ -119,13 +121,15 @@ public class Player : MonoBehaviour
         {
             ammo--;
             totalThrown++;
-            source.PlayOneShot(throw_sfx, 1);
+            source.PlayOneShot(throw_sfx, sfx_volume * 1);
             uiManager.updateAmmo(ammo);
-            Instantiate(pasta, transform.position, transform.rotation);
+            GameObject newPasta = Instantiate(pasta, transform.position, transform.rotation);
+            Pasta p = newPasta.GetComponent<Pasta>();
+            p.sfx_volume = sfx_volume;
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            source.PlayOneShot(fail_sfx, 1);
+            source.PlayOneShot(fail_sfx, sfx_volume * 1);
             uiManager.emptyWarning();
         }
     }
@@ -135,7 +139,7 @@ public class Player : MonoBehaviour
         // if the item is pasta, increase ammo by 1
         if (item.transform.name == "Pasta_Pickup(Clone)" && ammo < maxAmmo)
         {
-            source.PlayOneShot(pickup_sfx, 0.6f);
+            source.PlayOneShot(pickup_sfx, sfx_volume * 0.6f);
             ammo++;
             uiManager.updateAmmo(ammo);
             Destroy(item);
@@ -144,7 +148,7 @@ public class Player : MonoBehaviour
         {
             playingFailSFX = true;
             uiManager.fullWarning();
-            source.PlayOneShot(fail_sfx, 1);
+            source.PlayOneShot(fail_sfx, sfx_volume * 1);
         }
         else if (item.transform.name == "Force_Field_Pickup(Clone)")
         {
@@ -183,7 +187,7 @@ public class Player : MonoBehaviour
             {
                 if (ammo >= maxAmmo)
                 {
-                    source.PlayOneShot(fail_sfx, 1);
+                    source.PlayOneShot(fail_sfx, sfx_volume * 1);
                     uiManager.fullWarning();
                     break;
                 }
@@ -192,7 +196,7 @@ public class Player : MonoBehaviour
                     ammo++;
                     platesGained++;
                     uiManager.updateKitchenMeter(platesGained, false);
-                    source.PlayOneShot(pickup_sfx, 0.5f);
+                    source.PlayOneShot(pickup_sfx, sfx_volume * 0.5f);
                     uiManager.updateAmmo(ammo);
                 }
             }
@@ -209,7 +213,7 @@ public class Player : MonoBehaviour
         kitchen.kitchenReady = false;
         yield return new WaitForSeconds(kitchenReloadTime);
 
-        source.PlayOneShot(kitchen_ready_sfx, 1);
+        source.PlayOneShot(kitchen_ready_sfx, sfx_volume * 1);
         kitchen.kitchenReady = true;
         kitchenReady = true;
     }
@@ -284,7 +288,7 @@ public class Player : MonoBehaviour
     {
         if (forcefieldActive == false)
         {
-            source.PlayOneShot(shield_sfx, 0.2f);
+            source.PlayOneShot(shield_sfx, sfx_volume * 0.2f);
             forcefieldActive = true;
             forcefield.SetActive(true);
             forcefieldTimeRemaining = forcefieldTime;
@@ -302,7 +306,7 @@ public class Player : MonoBehaviour
     private void deactivateForceField()
     {
         source.Stop();
-        source.PlayOneShot(shield_powerdown_sfx, 0.6f);
+        source.PlayOneShot(shield_powerdown_sfx, sfx_volume * 0.6f);
         forcefieldActive = false;
         forcefield.SetActive(false);
         uiManager.updateShield(0, forcefieldTime);
@@ -322,8 +326,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shootPasta();
-        checkKitchen();
+        if (Time.timeScale != 0)
+        {
+            shootPasta();
+            checkKitchen();
+        }
 
         if (Input.GetKeyUp(KeyCode.Space)) playingFailSFX = false;
     }

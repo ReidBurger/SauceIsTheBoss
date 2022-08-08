@@ -20,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     private float enemyAccuracy = 0.8f;
     private float enemySpeed;
     public bool bossOut = false;
+    public float sfx_volume = 1;
 
     private IEnumerator spawnRoutine()
     {
@@ -32,6 +33,7 @@ public class EnemySpawner : MonoBehaviour
                 newSpawn.transform.SetParent(transform);
 
                 Enemy thisEnemy = newSpawn.transform.GetComponent<Enemy>();
+                thisEnemy.sfx_volume = sfx_volume;
                 thisEnemy.updateBehavior(enemyShootMin, enemyShootMax, enemyAccuracy, enemySpeed);
             }
         }

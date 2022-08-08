@@ -29,6 +29,7 @@ public class Boss : MonoBehaviour
     private Vector2 currentPosition;
     public delegate void KitchenSuccess();
     public static event KitchenSuccess KitchenReached;
+    public float sfx_volume = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +72,7 @@ public class Boss : MonoBehaviour
     {
         animator.SetTrigger("Is_Dead");
         StopAllCoroutines();
-        source.PlayOneShot(death_sfx, 1);
+        source.PlayOneShot(death_sfx, sfx_volume * 1);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<Collider2D>().enabled = false;
         gun.SetActive(false);
@@ -105,10 +106,12 @@ public class Boss : MonoBehaviour
                 transform.up = player.transform.position - transform.position;
                 transform.Rotate(new Vector3(0, 0, angleOffset));
 
-                source.PlayOneShot(shoot_sfx, 1);
+                source.PlayOneShot(shoot_sfx, sfx_volume * 1);
                 GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
+                Bullet bl = newBullet.GetComponent<Bullet>();
+                bl.sfx_volume = sfx_volume;
 
-                yield return new WaitForSeconds(fireRate);
+            yield return new WaitForSeconds(fireRate);
             }
     }
 
@@ -173,7 +176,10 @@ public class Boss : MonoBehaviour
         if (Vector2.Distance(transform.position, kitchen.transform.position) < 0.1f)
         {
             // Game Over
-            KitchenReached?.Invoke();
+            if (player != null)
+            {
+                KitchenReached?.Invoke();
+            }
             Destroy(gameObject);
         }
     }

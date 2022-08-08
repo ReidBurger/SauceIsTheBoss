@@ -14,6 +14,7 @@ public class Pasta : MonoBehaviour
     private bool hasSplat = false;
     [SerializeField]
     private GameObject splat_anim;
+    public float sfx_volume;
 
     private void Start()
     {
@@ -46,7 +47,7 @@ public class Pasta : MonoBehaviour
     private void splat()
     {
         hasSplat = true;
-        source.PlayOneShot(splat_sfx, 0.5f);
+        source.PlayOneShot(splat_sfx, sfx_volume * 0.5f);
         gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
         Instantiate(splat_anim, transform.position, Quaternion.identity);
         Destroy(gameObject, 0.4f);
